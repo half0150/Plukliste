@@ -3,13 +3,13 @@
     public class Pluklist
     {
         public string? Name { get; set; }
-        public string? Forsendelse { get; set; }
-        public string? Adresse { get; set; }
-        public List<Item> Lines { get; set; } = new List<Item>();
+        public string? Shipment { get; set; }
+        public string? Address { get; set; }
+        public List<Item> Items { get; private set; } = new List<Item>();
 
         public void AddItem(Item item)
         {
-            Lines.Add(item);
+            Items.Add(item);
         }
     }
 
@@ -23,7 +23,7 @@
 
     public enum ItemType
     {
-        Fysisk,
+        Physical,
         Print
     }
 }
