@@ -123,34 +123,35 @@ class PluklisteProgram
     private static void PrintPickSlip(Pluklist plukliste)
     {
         Console.WriteLine("\nChoose a template for printing:");
-        Console.WriteLine("OPGRADE");
-        Console.WriteLine("OPSIGELSE");
-        Console.WriteLine("WELCOME");
+        Console.WriteLine("1: OPGRADE");
+        Console.WriteLine("2: OPSIGELSE");
+        Console.WriteLine("3: WELCOME");
 
         char templateChoice = Console.ReadKey().KeyChar;
-        string selectedTemplate = "/PRINT-WELCOME.html"; 
+        string selectedTemplate = "PRINT-WELCOME.html";
 
         switch (templateChoice)
         {
             case '1':
-                selectedTemplate = "/PRINT-OPGRADE.html";
+                selectedTemplate = "PRINT-OPGRADE.html";
                 break;
             case '2':
-                selectedTemplate = "/PRINT-OPSIGELSE.html";
+                selectedTemplate = "PRINT-OPSIGELSE.html";
                 break;
             case '3':
-                selectedTemplate = "/PRINT-WELCOME.html";
+                selectedTemplate = "PRINT-WELCOME.html";
                 break;
             default:
                 Console.WriteLine("\nInvalid choice, using default template.");
                 break;
         }
 
-        string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "templates", selectedTemplate);
+        string baseDirectory = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"));
+        string templatePath = Path.Combine(baseDirectory, "templates", selectedTemplate);
 
         if (!File.Exists(templatePath))
         {
-            Console.WriteLine($"Template file \"{selectedTemplate}\" not found.");
+            Console.WriteLine($"Template file \"{selectedTemplate}\" not found at path: {templatePath}");
             return;
         }
 
